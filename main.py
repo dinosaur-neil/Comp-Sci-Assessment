@@ -148,6 +148,24 @@ def down():
     for row in reversed(rows):
         my_tree.move(row, my_tree.parent(row), my_tree.index(row)+1)
 
+# Remove one Shop_detail
+def remove_one():
+    x = my_tree.selection()[0]
+    my_tree.delete(x) 
+
+# Remove Many Shop_details
+def remove_many():
+    x = my_tree.selection()
+    for shop_detail in x:
+        my_tree.delete(shop_detail)
+        
+
+# Remove All Shop_details
+def remove_all():
+    for Shop_detail in my_tree.get_children():
+        my_tree.delete(shop_detail)
+
+
 # Clear Entry Boxes
 def clear_entries():
     # Clear entry boxes
@@ -184,8 +202,21 @@ def select_Shop_details(e):
     number_entry.insert(0, values[5])
     date_entry.insert(0, values[6]) 
 
- 
+# Update record
+def update_record():
+    # Grab the record number
+    selected = my_tree.focus()  
+    # Update shop_details
+    my_tree.item(selected, text="", values=(fn_entry.get(), ln_entry.get(), id_entry.get(), receipt_entry.get(), item_entry.get(), number_entry.get(), date_entry.get(),))
 
+# Clear entry boxes
+    fn_entry.delete(0, END)
+    ln_entry.delete(0, END)
+    id_entry.delete(0, END)
+    receipt_entry.delete(0, END)
+    item_entry.delete(0, END)
+    number_entry.delete(0, END)
+    date_entry.delete(0, END)  
 
 # Add all Buttons That are Very Relevant for This Program    
 button_frame = LabelFrame(root, text="Commands")
@@ -197,13 +228,13 @@ update_button.grid(row=0, column=0, padx=10, pady=10)
 add_button = Button(button_frame, text="Add Customer Details")
 add_button.grid(row=0, column=1, padx=10, pady=10)
 
-remove_all_button = Button(button_frame, text="Remove All Customer Details")
+remove_all_button = Button(button_frame, text="Remove All Customer Details", command=remove_all)
 remove_all_button.grid(row=0, column=2, padx=10, pady=10)
 
-remove_one_button = Button(button_frame, text="Remove One Selected")
+remove_one_button = Button(button_frame, text="Remove One Selected", command=remove_one)
 remove_one_button.grid(row=0, column=3, padx=10, pady=10)
 
-remove_many_button = Button(button_frame, text="Remove Many Seleted")
+remove_many_button = Button(button_frame, text="Remove Many Seleted", command=remove_many)
 remove_many_button.grid(row=0, column=4, padx=10, pady=10)
 
 move_up_button = Button(button_frame, text="Move Row Up", command=up)
