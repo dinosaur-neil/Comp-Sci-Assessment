@@ -1,3 +1,4 @@
+from audioop import reverse
 from tkinter import *
 from tkinter import ttk
 
@@ -135,6 +136,29 @@ date_label.grid(row=6, column=0, padx=10, pady=10)
 date_entry = Entry(data_frame)
 date_entry.grid(row=6, column=1, padx=10, pady=10)
 
+# Move Row Up
+def up():
+    rows = my_tree.selection()
+    for row in rows:
+        my_tree.move(row, my_tree.parent(row), my_tree.index(row)-1)
+
+# Move Row Down
+def down():
+    rows = my_tree.selection()
+    for row in reversed(rows):
+        my_tree.move(row, my_tree.parent(row), my_tree.index(row)+1)
+
+# Clear Entry Boxes
+def clear_entries():
+    # Clear entry boxes
+    fn_entry.delete(0, END)
+    ln_entry.delete(0, END)
+    id_entry.delete(0, END)
+    receipt_entry.delete(0, END)
+    item_entry.delete(0, END)
+    number_entry.delete(0, END)
+    date_entry.delete(0, END)  
+
 # Select Shop_details
 def select_Shop_details(e):
     # Clear entry boxes
@@ -182,13 +206,13 @@ remove_one_button.grid(row=0, column=3, padx=10, pady=10)
 remove_many_button = Button(button_frame, text="Remove Many Seleted")
 remove_many_button.grid(row=0, column=4, padx=10, pady=10)
 
-move_up_button = Button(button_frame, text="Move Up")
+move_up_button = Button(button_frame, text="Move Row Up", command=up)
 move_up_button.grid(row=0, column=5, padx=10, pady=10)
 
-move_down_button = Button(button_frame, text="Move Down")
+move_down_button = Button(button_frame, text="Move Row Down", command=down)
 move_down_button.grid(row=0, column=6, padx=10, pady=10)
 
-select_customer_button = Button(button_frame, text="Select row", command=select_Shop_details)
+select_customer_button = Button(button_frame, text="Clear Entry Boxes", command=clear_entries)
 select_customer_button.grid(row=0, column=7 , padx=10, pady=10)
 
 # Bind the treeview
