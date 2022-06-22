@@ -1,7 +1,7 @@
 from audioop import reverse
 from tkinter import *
 from tkinter import ttk
-
+import sqlite3
 
 root = Tk()
 root.title('Julies Party Hire Store')
@@ -10,7 +10,7 @@ root.geometry("1000x850")
 # Add Colours to make it look more appealing for the user of the program
 style = ttk.Style()
 
-# Pick A Theme
+# Pick A Themex 
 style.theme_use('default')
 
 # Configure the Treeview Colours
@@ -163,7 +163,7 @@ def remove_many():
 # Remove All Shop_details
 def remove_all():
     for Shop_detail in my_tree.get_children():
-        my_tree.delete(shop_detail)
+        my_tree.delete(Shop_detail)
 
 
 # Clear Entry Boxes
@@ -203,7 +203,7 @@ def select_Shop_details(e):
     date_entry.insert(0, values[6]) 
 
 # Update record
-def update_record():
+def update_shop_detail():
     # Grab the record number
     selected = my_tree.focus()  
     # Update shop_details
@@ -222,7 +222,7 @@ def update_record():
 button_frame = LabelFrame(root, text="Commands")
 button_frame.pack(fill="x", expand="yes", padx=20)
 
-update_button = Button(button_frame, text="Update Customer Details")
+update_button = Button(button_frame, text="Update Customer Details", command=update_shop_detail)
 update_button.grid(row=0, column=0, padx=10, pady=10)
 
 add_button = Button(button_frame, text="Add Customer Details")
@@ -249,6 +249,5 @@ select_customer_button.grid(row=0, column=7 , padx=10, pady=10)
 # Bind the treeview
 my_tree.bind("<ButtonRelease-1>", select_Shop_details)
 
-
-
+# Run to pull data from database on start
 root.mainloop()
