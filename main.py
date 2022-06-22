@@ -4,7 +4,7 @@ from tkinter import ttk
 
 root = Tk()
 root.title('Julies Party Hire Store')
-root.geometry("1000x500")
+root.geometry("1000x850")
 
 # Add Colours to make it look more appealing for the user of the program
 style = ttk.Style()
@@ -96,9 +96,9 @@ for shop_detail in data:
     count += 1
 
 
-# Add Shop_detail Entry Boxes
+# Add Shop_detail Entry all labels go inside one big box
 data_frame = LabelFrame(root, text="Shop_details")   
-data_frame.pack(fill="x", expand="yes", padx=20)
+data_frame.pack(fill="x", expand="yes", padx=350)
 
 fn_label = Label(data_frame, text="First Name :")
 fn_label.grid(row=0, column=0, padx=10, pady=10)
@@ -106,36 +106,93 @@ fn_entry = Entry(data_frame)
 fn_entry.grid(row=0, column=1, padx=10, pady=10)
 
 ln_label = Label(data_frame, text="Last Name :")
-ln_label.grid(row=0, column=2, padx=10, pady=10)
+ln_label.grid(row=1, column=0, padx=10, pady=10)
 ln_entry = Entry(data_frame)
-ln_entry.grid(row=0, column=3, padx=10, pady=10)
+ln_entry.grid(row=1, column=1, padx=10, pady=10)
 
 id_label = Label(data_frame, text="ROW ID #")
-id_label.grid(row=0, column=4, padx=10, pady=10)
+id_label.grid(row=2, column=0, padx=10, pady=10)
 id_entry = Entry(data_frame)
-id_entry.grid(row=0, column=5, padx=10, pady=10)
+id_entry.grid(row=2, column=1, padx=10, pady=10)
 
 receipt_label = Label(data_frame, text="Receipt Number :")
-receipt_label.grid(row=1, column=0, padx=10, pady=10)
+receipt_label.grid(row=3, column=0, padx=10, pady=10)
 receipt_entry = Entry(data_frame)
-receipt_entry.grid(row=1, column=1, padx=10, pady=10)
+receipt_entry.grid(row=3, column=1, padx=10, pady=10)
 
 item_label = Label(data_frame, text="Item Hired :")
-item_label.grid(row=1, column=2, padx=10, pady=10)
+item_label.grid(row=4, column=0, padx=10, pady=10)
 item_entry = Entry(data_frame)
-item_entry.grid(row=1, column=3, padx=10, pady=10)
+item_entry.grid(row=4, column=1, padx=10, pady=10)
 
 number_label = Label(data_frame, text="Number of Item Hired :")
-number_label.grid(row=1, column=4, padx=10, pady=10)
+number_label.grid(row=5, column=0, padx=10, pady=10)
 number_entry = Entry(data_frame)
-number_entry.grid(row=1, column=5, padx=10, pady=10)
+number_entry.grid(row=5, column=1, padx=10, pady=10)
 
 date_label = Label(data_frame, text="Date Hired :")
-date_label.grid(row=1, column=6, padx=10, pady=10)
+date_label.grid(row=6, column=0, padx=10, pady=10)
 date_entry = Entry(data_frame)
-date_entry.grid(row=1, column=7, padx=10, pady=10)
+date_entry.grid(row=6, column=1, padx=10, pady=10)
 
-# Add Buttons 
+# Select Shop_details
+def select_Shop_details(e):
+    # Clear entry boxes
+    fn_entry.delete(0, END)
+    ln_entry.delete(0, END)
+    id_entry.delete(0, END)
+    receipt_entry.delete(0, END)
+    item_entry.delete(0, END)
+    number_entry.delete(0, END)
+    date_entry.delete(0, END)  
+
+    # Grab Shop_details number
+    selected = my_tree.focus()
+    # Grab Shop_details values
+    values = my_tree.item(selected, 'values')
+
+    # output to Entry Boxes
+    fn_entry.insert(0, values[0])
+    ln_entry.insert(0, values[1])
+    id_entry.insert(0, values[2])
+    receipt_entry.insert(0, values[3])
+    item_entry.insert(0, values[4])
+    number_entry.insert(0, values[5])
+    date_entry.insert(0, values[6]) 
+
+ 
+
+
+# Add all Buttons That are Very Relevant for This Program    
+button_frame = LabelFrame(root, text="Commands")
+button_frame.pack(fill="x", expand="yes", padx=20)
+
+update_button = Button(button_frame, text="Update Customer Details")
+update_button.grid(row=0, column=0, padx=10, pady=10)
+
+add_button = Button(button_frame, text="Add Customer Details")
+add_button.grid(row=0, column=1, padx=10, pady=10)
+
+remove_all_button = Button(button_frame, text="Remove All Customer Details")
+remove_all_button.grid(row=0, column=2, padx=10, pady=10)
+
+remove_one_button = Button(button_frame, text="Remove One Selected")
+remove_one_button.grid(row=0, column=3, padx=10, pady=10)
+
+remove_many_button = Button(button_frame, text="Remove Many Seleted")
+remove_many_button.grid(row=0, column=4, padx=10, pady=10)
+
+move_up_button = Button(button_frame, text="Move Up")
+move_up_button.grid(row=0, column=5, padx=10, pady=10)
+
+move_down_button = Button(button_frame, text="Move Down")
+move_down_button.grid(row=0, column=6, padx=10, pady=10)
+
+select_customer_button = Button(button_frame, text="Select row", command=select_Shop_details)
+select_customer_button.grid(row=0, column=7 , padx=10, pady=10)
+
+# Bind the treeview
+my_tree.bind("<ButtonRelease-1>", select_Shop_details)
 
 
 
