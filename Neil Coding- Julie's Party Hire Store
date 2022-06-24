@@ -3,7 +3,8 @@ import sqlite3
 
 
 root = Tk()
-root.title('Julies Party Hire Store')
+root.title("Julie's Party Hire Store")
+root.configure(bg="goldenrod")
 root.geometry("400x400")
 
 # Databases
