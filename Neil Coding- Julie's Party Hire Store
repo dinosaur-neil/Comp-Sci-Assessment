@@ -1,0 +1,64 @@
+from tkinter import *
+import sqlite3
+
+
+root = Tk()
+root.title('Julies Party Hire Store')
+root.geometry("400x400")
+
+# Databases
+
+# Create a database or connect to one
+conn = sqlite3.connect('address_book.db')
+
+# Create cursor
+c = conn.cursor()
+
+# Create table
+'''
+c.execute("""CREATE TABLE addresses (
+        first_name text,
+        last_name text,
+        receipt integer,
+        item text,
+        number integer,
+        date integer
+        )""")
+'''
+# Create Text boxes of each 6 customer details needed
+f_name = Entry(root, width=30)
+f_name.grid(row=0, column=1, padx=20)
+l_name = Entry(root, width=30)
+l_name.grid(row=1, column=1, padx=20)
+receipt = Entry(root, width=30)
+receipt.grid(row=2, column=1, padx=20)
+item = Entry(root, width=30)
+item.grid(row=3, column=1, padx=20)
+number = Entry(root, width=30)
+number.grid(row=4, column=1, padx=20)
+date = Entry(root, width=30)
+date.grid(row=5, column=1, padx=20)
+
+# Create labels on the side for each box to know where your writting to customer details
+f_name_label = Label(root, text="First Name :")
+f_name_label.grid(row=0, column=0)
+l_name_label = Label(root, text="Last Name :")
+l_name_label.grid(row=1, column=0)
+receipt_label = Label(root, text="Receipt Number :")
+receipt_label.grid(row=2, column=0)
+item_label = Label(root, text="Item Hired :")
+item_label.grid(row=3, column=0)
+number_name_label = Label(root, text="Number of Item Hired :")
+number_name_label.grid(row=4, column=0)
+date_name_label = Label(root, text="Date Hired :")
+date_name_label.grid(row=5, column=0)
+
+
+
+#Commit changes
+conn.commit()
+
+# Close Connection
+conn.close()
+
+root.mainloop()
