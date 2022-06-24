@@ -26,6 +26,18 @@ c.execute("""CREATE TABLE addresses (
         date integer
         )""")
 '''
+
+# Create submit function for database
+def submit():
+    # Clear The Text Boxes
+    f_name.delete(0, END)
+    l_name.delete(0, END)
+    receipt.delete(0, END)
+    item.delete(0, END)
+    number.delete(0, END)
+    date.delete(0, END)
+
+
 # Create Text boxes of each 6 customer details needed
 f_name = Entry(root, width=30)
 f_name.grid(row=0, column=1, padx=20)
@@ -54,7 +66,9 @@ number_name_label.grid(row=4, column=0)
 date_name_label = Label(root, text="Date Hired :")
 date_name_label.grid(row=5, column=0)
 
-
+# Creating a Submit Button
+submit_btn = Button(root, text="Append Customer's Details")
+submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 #Commit changes
 conn.commit()
