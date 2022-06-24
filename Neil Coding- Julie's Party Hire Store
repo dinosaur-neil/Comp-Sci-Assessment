@@ -52,9 +52,6 @@ def submit():
     # Close Connection
     conn.close()
     
-    
-    
-    
     # Clear The Text Boxes
     f_name.delete(0, END)
     l_name.delete(0, END)
@@ -63,9 +60,24 @@ def submit():
     number.delete(0, END)
     date.delete(0, END)    
     
+# Create Query Function
+def query():
+    # Create a database or connect to one
+    conn = sqlite3.connect('address_book.db')
+    #Create cursor
+    c = conn.cursor() 
 
-   
+    # Query the database
+    c.execute("SELECT *, oid FROM addresses")
+    customerdetails = c.fetchall()
+    print(customerdetails)
 
+
+    #Commit changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()
 
 # Create Text boxes of each 6 customer details needed
 f_name = Entry(root, width=30)
@@ -98,6 +110,11 @@ date_name_label.grid(row=5, column=0)
 # Creating a Submit Button
 submit_btn = Button(root, text="Append Customer's Details", command=submit)
 submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+
+# Creating a Query Button
+query_btn = Button(root, text="Print Customer's Details", command=query)
+query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+
 
 #Commit changes
 conn.commit()
