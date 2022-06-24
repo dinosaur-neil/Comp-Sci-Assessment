@@ -33,8 +33,10 @@ def delete():
     #Create cursor
     c = conn.cursor()  
 
-    # Delete a certain Customers details
-    c.execute("DELETE from addresses WHERE oid=PLACEHOLDER")
+    # Delete a certain row of Customers details
+    c.execute("DELETE from addresses WHERE oid= " + delete_box.get())
+
+    delete_box.delete(0, END)
 
     #Commit changes
     conn.commit()
