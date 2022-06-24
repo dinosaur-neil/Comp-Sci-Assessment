@@ -26,6 +26,23 @@ c.execute("""CREATE TABLE addresses (
         date integer
         )""")
 '''
+# Create function to Delete a row of a customers details
+def delete():
+    # Create a database or connect to one
+    conn = sqlite3.connect('address_book.db')
+    #Create cursor
+    c = conn.cursor()  
+
+    # Delete a certain Customers details
+    c.execute("DELETE from addresses WHERE oid=PLACEHOLDER")
+
+    #Commit changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()
+
+
 
 # Create submit function for database
 def submit():
@@ -75,10 +92,10 @@ def query():
     # Loop Thru Results
     print_customerdetails = ''
     for customerdetail in customerdetails:
-        print_customerdetails += str(customerdetail)
+        print_customerdetails += str(customerdetail) + "\n"
 
     query_label = Label(root, text=print_customerdetails)    
-    query_label.grid(row=8, column=0, columnspan=2)
+    query_label.grid(row=11, column=0, columnspan=2)
 
     #Commit changes
     conn.commit()
@@ -99,6 +116,8 @@ number = Entry(root, width=30)
 number.grid(row=4, column=1, padx=20)
 date = Entry(root, width=30)
 date.grid(row=5, column=1, padx=20)
+delete_box =Entry(root, width=30)
+delete_box.grid(row=9, column=1, pady=5)
 
 # Create labels on the side for each box to know where your writting to customer details
 f_name_label = Label(root, text="First Name :", bg="dark goldenrod")
@@ -113,15 +132,20 @@ number_name_label = Label(root, text="Number of Item Hired :", bg="dark goldenro
 number_name_label.grid(row=4, column=0)
 date_name_label = Label(root, text="Date Hired :", bg="dark goldenrod")
 date_name_label.grid(row=5, column=0)
+delete_box_label = Label(root, text= "Delete Row #", bg="dark goldenrod")
+delete_box_label.grid(row=9, column=0, pady=5)
 
 # Creating a Submit Button
-submit_btn = Button(root, text="Append Customer's Details", command=submit)
-submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
+submit_btn = Button(root, text="Append Customers Details", command=submit)
+submit_btn.grid(row=6, column=0, columnspan=2, pady=1, padx=1, ipadx=1)
 
 # Creating a Query Button
-query_btn = Button(root, text="Print Customer's Details", command=query)
-query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+query_btn = Button(root, text="Print Customers Details", command=query)
+query_btn.grid(row=7, column=0, columnspan=2, pady=1, padx=1, ipadx=1)
 
+#Create a Delete Button
+delete_btn = Button(root, text="Delete Row", command=delete)
+delete_btn.grid(row=10, column=0, columnspan=2, pady=5, padx=5, ipadx=25)
 
 #Commit changes
 conn.commit()
