@@ -71,7 +71,14 @@ def query():
     c.execute("SELECT *, oid FROM addresses")
     customerdetails = c.fetchall()
     print(customerdetails)
+    
+    # Loop Thru Results
+    print_customerdetails = ''
+    for customerdetail in customerdetails:
+        print_customerdetails += str(customerdetail)
 
+    query_label = Label(root, text=print_customerdetails)    
+    query_label.grid(row=8, column=0, columnspan=2)
 
     #Commit changes
     conn.commit()
@@ -81,7 +88,7 @@ def query():
 
 # Create Text boxes of each 6 customer details needed
 f_name = Entry(root, width=30)
-f_name.grid(row=0, column=1, padx=20)
+f_name.grid(row=0, column=1, padx=20, pady=(10, 0))
 l_name = Entry(root, width=30)
 l_name.grid(row=1, column=1, padx=20)
 receipt = Entry(root, width=30)
@@ -95,7 +102,7 @@ date.grid(row=5, column=1, padx=20)
 
 # Create labels on the side for each box to know where your writting to customer details
 f_name_label = Label(root, text="First Name :", bg="dark goldenrod")
-f_name_label.grid(row=0, column=0)
+f_name_label.grid(row=0, column=0, pady=(10, 0))
 l_name_label = Label(root, text="Last Name :", bg="dark goldenrod")
 l_name_label.grid(row=1, column=0)
 receipt_label = Label(root, text="Receipt Number :", bg="dark goldenrod")
