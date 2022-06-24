@@ -29,13 +29,42 @@ c.execute("""CREATE TABLE addresses (
 
 # Create submit function for database
 def submit():
+    # Create a database or connect to one
+    conn = sqlite3.connect('address_book.db')
+    #Create cursor
+    c = conn.cursor()  
+    
+    # Insert into Table
+    c.execute("INSERT INTO addresses VALUES (:f_name, :l_name, :receipt, :item, :number, :date)",
+            {
+                'f_name': f_name.get(),
+                'l_name': l_name.get(),
+                'receipt': receipt.get(),
+                'item': item.get(),
+                'number': number.get(),
+                'date': date.get()
+            })
+
+
+    #Commit changes
+    conn.commit()
+
+    # Close Connection
+    conn.close()
+    
+    
+    
+    
     # Clear The Text Boxes
     f_name.delete(0, END)
     l_name.delete(0, END)
     receipt.delete(0, END)
     item.delete(0, END)
     number.delete(0, END)
-    date.delete(0, END)
+    date.delete(0, END)    
+    
+
+   
 
 
 # Create Text boxes of each 6 customer details needed
@@ -53,21 +82,21 @@ date = Entry(root, width=30)
 date.grid(row=5, column=1, padx=20)
 
 # Create labels on the side for each box to know where your writting to customer details
-f_name_label = Label(root, text="First Name :")
+f_name_label = Label(root, text="First Name :", bg="dark goldenrod")
 f_name_label.grid(row=0, column=0)
-l_name_label = Label(root, text="Last Name :")
+l_name_label = Label(root, text="Last Name :", bg="dark goldenrod")
 l_name_label.grid(row=1, column=0)
-receipt_label = Label(root, text="Receipt Number :")
+receipt_label = Label(root, text="Receipt Number :", bg="dark goldenrod")
 receipt_label.grid(row=2, column=0)
-item_label = Label(root, text="Item Hired :")
+item_label = Label(root, text="Item Hired :", bg="dark goldenrod")
 item_label.grid(row=3, column=0)
-number_name_label = Label(root, text="Number of Item Hired :")
+number_name_label = Label(root, text="Number of Item Hired :", bg="dark goldenrod")
 number_name_label.grid(row=4, column=0)
-date_name_label = Label(root, text="Date Hired :")
+date_name_label = Label(root, text="Date Hired :", bg="dark goldenrod")
 date_name_label.grid(row=5, column=0)
 
 # Creating a Submit Button
-submit_btn = Button(root, text="Append Customer's Details")
+submit_btn = Button(root, text="Append Customer's Details", command=submit)
 submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 
 #Commit changes
